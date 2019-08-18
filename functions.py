@@ -1,5 +1,7 @@
 import logging
 import handlers
+import commands
+import requests
 from telegram.ext import MessageHandler, CommandHandler
 
 def logs():
@@ -7,11 +9,33 @@ def logs():
     logger = logging.getLogger(__name__)
     return logger
 
+def check_connection(host):
+    logging.info("Testing connection to %s" % (host))
+    try:
+        response = requests.get(host, timeout=10)
+        if (response.status_code == 200):
+            status = True
+        time = response.elapsed.total_seconds()
+    except OSError:
+        status = False
+        time = None
+    return (status, time)
+
+def sendStatusMsg(bot, update, msg):
+    bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text=msg)
+
 def handlersProcess(updater, dispatcher):
+    # Command handlers
+    command_dict = dict(multimedia=CommandHandler('multimedia', commands.multimedia),
+                        onepiece=CommandHandler('onepiece', commands.onepiece),
+                        doctorwho=CommandHandler('doctorwho', commands.doctorwho))
+    for command in command_dict:
+        dispatcher.add_handler(command_dict[command])
+
     # Error handler
     dispatcher.add_error_handler(handlers.error)
 
-    # Entry and exit handler
+    # Forward admin message handler
     dispatcher.add_handler(MessageHandler(None, handlers.adminForward))
 
     # Start the bot
