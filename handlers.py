@@ -1,5 +1,7 @@
 import functions
 import logging
+import sys
+
 try:
     from settings_secret import *
 except:
@@ -10,6 +12,7 @@ def error(update, error):
     logger.warning('Update "%s" caused error "%s"', update, error)
 
 def adminForward(bot, update):
-    if (update.message.chat_id in admins_id ):
-        bot.send_message(chat_id=notify_dest_id, text=update.message.text)
-        logging.info("Message from %d forwarded to %d." % (update.message.chat_id, notify_dest_id))
+    if (update.message.chat_id in admins_id.values()):
+        for send_id in notify_dest_id.values():
+            bot.send_message(chat_id=send_id, text=update.message.text)
+            logging.info("Message from %d forwarded to %d." % (update.message.chat_id, send_id))
