@@ -1,8 +1,9 @@
 import logging
 import handlers
 import commands
+import jobs
 import requests
-from telegram.ext import MessageHandler, CommandHandler
+from telegram.ext import MessageHandler, CommandHandler, CallbackContext
 
 def logs():
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -43,3 +44,7 @@ def handlersProcess(updater, dispatcher):
 
     # Wait for Ctrl-C or other SIGs to end the process
     updater.idle()
+
+def handleJobs(jobqueue, dispatcher):
+    dispatcher.bot_data["top"] = ""
+    job_multimediaQueue = jobqueue.run_repeating(jobs.multimediaQueue, interval=5, first=0)
