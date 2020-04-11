@@ -2,7 +2,7 @@ import functions
 import logging
 from emoji import emojize
 
-def multimedia(bot, update):
+def multimedia(update, context):
     status, time = functions.check_connection("https://multimedia.xarxacatala.cat")
     if (status):
         time = str(round(time, 3)).replace(".", ",")
@@ -10,10 +10,10 @@ def multimedia(bot, update):
                       "Temps de resposta: " + time + " s", use_aliases=True)
     else:
         msg = emojize("Estat del servidor multimèdia: :x:", use_aliases=True)
-    functions.sendStatusMsg(bot, update, msg)
+    functions.sendStatusMsg(context.bot, update, msg)
     logging.info("Multimedia status message sent to %d." % (update.message.chat_id))
 
-def onepiece(bot, update):
+def onepiece(update, context):
     status, time = functions.check_connection("https://www.onepiececatala.cat")
     if (status):
         time = str(round(time, 3)).replace(".", ",")
@@ -21,10 +21,10 @@ def onepiece(bot, update):
                       "Temps de resposta: " + time + " s", use_aliases=True)
     else:
         msg = emojize("Estat de la web de One Piece: :x:", use_aliases=True)
-    functions.sendStatusMsg(bot, update, msg)
+    functions.sendStatusMsg(context.bot, update, msg)
     logging.info("One Piece web status message sent to %d." % (update.message.chat_id))
 
-def doctorwho(bot, update):
+def doctorwho(update, context):
     status, time = functions.check_connection("https://www.doctorwhocatala.cat")
     if (status):
         time = str(round(time, 3)).replace(".", ",")
@@ -32,5 +32,5 @@ def doctorwho(bot, update):
                       "Temps de resposta: " + time + " s", use_aliases=True)
     else:
         msg = emojize("Estat de la web de Doctor Who: :x:", use_aliases=True)
-    functions.sendStatusMsg(bot, update, msg)
+    functions.sendStatusMsg(context.bot, update, msg)
     logging.info("Doctor Who web status message sent to %d." % (update.message.chat_id))
