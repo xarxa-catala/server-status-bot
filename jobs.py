@@ -6,7 +6,7 @@ import os
 
 def multimediaQueue(context: telegram.ext.CallbackContext):
     top = context.bot_data["top"]
-    r = requests.get(url='https://gestor.multimedia.xarxacatala.cat/queue/')
+    r = requests.get(url='https://gestor.multimedia.xarxacatala.cat/cua/')
     queue = r.json()
 
     if not queue:
