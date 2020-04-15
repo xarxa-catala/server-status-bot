@@ -47,4 +47,4 @@ def handlersProcess(updater, dispatcher):
 
 def handleJobs(jobqueue, dispatcher):
     dispatcher.bot_data["top"] = ""
-    job_multimediaQueue = jobqueue.run_repeating(jobs.multimediaQueue, interval=5, first=0)
+    job_multimediaQueue = jobqueue.run_repeating(jobs.multimediaQueue, interval=15, first=0)
