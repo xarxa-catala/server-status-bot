@@ -1,7 +1,6 @@
 import logging
 import handlers
 import commands
-import jobs
 import requests
 from telegram.ext import MessageHandler, CommandHandler, CallbackContext
 
