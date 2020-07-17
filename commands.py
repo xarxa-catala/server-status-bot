@@ -14,7 +14,7 @@ def multimedia(update, context):
     logging.info("Multimedia status message sent to %d." % (update.message.chat_id))
 
 def onepiece(update, context):
-    status, time = functions.check_connection("https://www.onepiececatala.cat")
+    status, time = functions.check_connection("https://onepiece.xarxacatala.cat")
     if (status):
         time = str(round(time, 3)).replace(".", ",")
         msg = emojize("Estat de la web de One Piece: :white_check_mark:\n"
@@ -25,7 +25,7 @@ def onepiece(update, context):
     logging.info("One Piece web status message sent to %d." % (update.message.chat_id))
 
 def doctorwho(update, context):
-    status, time = functions.check_connection("https://www.doctorwhocatala.cat")
+    status, time = functions.check_connection("https://doctorwho.xarxacatala.cat")
     if (status):
         time = str(round(time, 3)).replace(".", ",")
         msg = emojize("Estat de la web de Doctor Who: :white_check_mark:\n"
